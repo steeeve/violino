@@ -1,0 +1,30 @@
+{
+  "name": "MINI",
+  "version": "1.0.0",
+  "description": "",
+  "dependencies": {},
+  "devDependencies": {
+    "backbone": "^1.1.2",
+    "chai": "^1.10.0",
+    "gulp": "^3.8.10",
+    "gulp-browserify": "^0.5.1",
+    "gulp-jshint": "^1.9.0",
+    "gulp-mocha": "^2.0.0",
+    "gulp-rename": "^1.2.0",
+    "gulp-ruby-haml": "0.0.3",
+    "gulp-ruby-sass": "^1.0.0-alpha.2",
+    "gulp-webserver": "^0.9.0",
+    "handlebars": "^2.0.0",
+    "hbsfy": "^2.2.1",
+    "jquery": "^2.1.3",
+    "mocha": "^2.1.0",
+    "sinon": "^1.12.2",
+    "underscore": "^1.7.0"
+  },
+  "scripts": {
+    "build": "bin/build",
+    "serve": "bin/serve",
+    "test": "bin/test"
+  },
+  "author": "Stephen Mckellar"
+}
