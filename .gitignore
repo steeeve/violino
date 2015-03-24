@@ -2,5 +2,4 @@
 /dist
 /.bundle
 /.sass-cache
-/src/lib
 /npm-debug.log

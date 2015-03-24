@@ -16,6 +16,11 @@ paths.lib = 'src/lib/**/*';
 paths.sass = 'src/sass/app.sass';
 paths.haml = 'src/index.haml';
 
+gulp.task('lib', function() {
+  return gulp.src(paths.lib)
+    .pipe(gulp.dest('dist/lib'));
+});
+
 gulp.task('sass', function() {
   return sass(paths.sass)
     .on('error', function (err) { console.error('Error!', err.message); })
@@ -34,7 +39,6 @@ gulp.task('js', function() {
     .pipe(jshint())
     .pipe(browserify({
       insertGlobals: true,
-      debug: !gulp.env.production,
       transform: ['hbsfy']
     }))
     .pipe(gulp.dest('dist/js'));
@@ -44,6 +48,7 @@ gulp.task('watch', function() {
   gulp.watch(paths.js, ['js']);
   gulp.watch(paths.haml, ['haml']);
   gulp.watch(paths.sass, ['sass']);
+  gulp.watch(paths.lib, ['lib']);
 });
 
 gulp.task('serve', function() {
@@ -60,4 +65,4 @@ gulp.task('test', function() {
     .pipe(mocha({reporter: 'spec'}));
 });
 
-gulp.task('build', ['haml', 'sass', 'js']);
+gulp.task('build', ['lib', 'haml', 'sass', 'js']);

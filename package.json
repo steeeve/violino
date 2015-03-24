@@ -2,7 +2,6 @@
   "name": "MINI",
   "version": "1.0.0",
   "description": "",
-  "dependencies": {},
   "devDependencies": {
     "backbone": "^1.1.2",
     "chai": "^1.10.0",
