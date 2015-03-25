@@ -9,6 +9,7 @@
     "jshint": "^2.6.3",
     "lodash": "^3.5.0",
     "mocha": "^2.1.0",
+    "pixi.js": "2.2.8",
     "sinon": "^1.12.2",
     "underscore": "^1.7.0"
   },

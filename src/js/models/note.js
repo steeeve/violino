@@ -1,3 +1,5 @@
+'use strict';
+
 var POSSIBLE_NOTES = [
   'C1',
   'B1',
