@@ -15,15 +15,18 @@ jshint: $(js_files) $(js_test_files)
 mocha: jshint $(js_files) $(js_test_files)
 	mocha test
 
-dist/js/app.js: mocha $(js_files) $(js_test_files)
+js: mocha $(js_files) $(js_test_files)
 	mkdir -p dist/js
 	browserify src/js/app.js > dist/js/app.js
 
-dist/css/app.css: $(sass_files)
+css: $(sass_files)
 	mkdir -p dist/css
 	sass src/sass/app.sass > dist/css/app.css
 
 html: $(haml_files)
 	find src -name \*.haml -print | sed 'p;s/.haml/.html/;s/^src/dist/' | xargs -n2 haml
 
-build: dist/js/app.js dist/css/app.css html lib
+watch:
+	fswatch-run src "make build"
+
+build: js css html lib
