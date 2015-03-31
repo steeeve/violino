@@ -1,22 +1,28 @@
-# Mini app
+# Violino
 
 # Requirements
 
     - Node.js
     - Ruby
-      - bundle (`gem install bundler`)
+    - bundle (gem)
+    - browserify (npm)
+    - jshint (npm)
+    - mocha (npm)
+    - http-server (npm)
+    - fswatch (brew)
 
 # Getting started
 
-Run a bundle install and setup the database:
+Run a bundle install:
 
     $ bundle install
     $ npm install
 
 Run the app locally:
 
-    $ npm run serve
+    $ make build
+    $ http-server dist -p 3000
 
 # Running tests
 
-    $ npm run test
+    $ make mocha
