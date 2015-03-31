@@ -1,39 +1,63 @@
 'use strict';
 
 var POSSIBLE_NOTES = [
-  'G3', // open
-  'A4',
-  'B4',
-  'C4',
-  'D4', // open
-  'E4',
-  'F4#',
-  'G4',
-  'A5', // open
-  'B5',
-  'C5#',
-  'D5',
-  'E5', // open
-  'F5#',
+  'A6',
   'G5#',
-  'A5'
+  'F5#',
+  'E5', // OPEN
+  'D5',
+  'C5#',
+  'B5',
+  'A5', // OPEN
+  'G4',
+  'F4#',
+  'E4',
+  'D4', // OPEN
+  'C4',
+  'B4',
+  'A4',
+  'G3'  // OPEN
+];
+
+var RANDOM_NOTES = [
+  'A6',
+  'G5#',
+  'F5#',
+  'E5', // OPEN
+  'D5',
+  'C5#',
+  'B5',
+  'A5', // OPEN
+  'G4',
+  'F4#',
+  'E4',
+  'D4', // OPEN
+  'C4',
+  'B4',
+  'A4',
+  'G3'  // OPEN
 ];
 
 var Note = function(note) {
   this.note = note;
+  this.POSSIBLE_NOTES = POSSIBLE_NOTES;
 };
 
 Note.random = function random() {
-  var randomNote = POSSIBLE_NOTES[Math.floor(Math.random() * POSSIBLE_NOTES.length)];
+  var randomNote = RANDOM_NOTES[Math.floor(Math.random() * RANDOM_NOTES.length)];
   return new Note(randomNote);
 };
 
 Note.prototype.isOutsideOfScore = function isOutsideOfScore() {
-  return POSSIBLE_NOTES.indexOf(this.note) < 3 || POSSIBLE_NOTES.indexOf(this.note) > 12;
+  return this.noteIndex() < 4 || this.noteIndex() > 11;
 };
 
 Note.prototype.isSharp = function isSharp() {
   return false;
+};
+
+Note.prototype.noteIndex = function noteIndex() {
+  return this.POSSIBLE_NOTES.indexOf(this.note);
 };
 
 module.exports = Note;

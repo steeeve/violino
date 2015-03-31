@@ -3,27 +3,9 @@
 var PIXI = require('pixi.js');
 var _ = require('lodash');
 
-var xOffset = 20;
-var yOffset = 20;
-var distance = 12;
-var notes = [
-  'G3', // open
-  'A4',
-  'B4',
-  'C4',
-  'D4', // open
-  'E4',
-  'F4#',
-  'G4',
-  'A5', // open
-  'B5',
-  'C5#',
-  'D5',
-  'E5', // open
-  'F5#',
-  'G5#',
-  'A5'
-];
+var xOffset = 100;
+var yOffset = 100;
+var lineDistance = 12;
 
 var MusicalScoreGraphics = function(options) {
   var _options = options || {};
@@ -42,14 +24,16 @@ MusicalScoreGraphics.prototype.setup = function setup(renderer) {
     var stage = renderer.stage;
     var lines = 5;
     var musicalScore = new PIXI.Graphics();
-    musicalScore.lineStyle(3, 0x909090, 1);
+    musicalScore.lineStyle(2, 0x909090, 1);
     musicalScore.moveTo(xOffset, yOffset);
-    musicalScore.lineTo(xOffset, yOffset + distance * (lines - 1));
+    musicalScore.lineTo(xOffset, yOffset + lineDistance * (lines - 1));
     musicalScore.moveTo(xOffset + 300, yOffset);
-    musicalScore.lineTo(xOffset+ 300, yOffset+ distance * (lines - 1));
+    musicalScore.lineTo(xOffset+ 300, yOffset+ lineDistance * (lines - 1));
+
+    musicalScore.lineStyle(1, 0x909090, 1);
 
     for(var i = 0; i < 5; i = i + 1) {
-      var y = i * distance;
+      var y = i * lineDistance;
       musicalScore.moveTo(xOffset + 0, yOffset + y);
       musicalScore.lineTo(xOffset + 300, yOffset + y);
     }
@@ -65,40 +49,74 @@ MusicalScoreGraphics.prototype.update = function update(renderer) {
     stage.removeChild(note);
   });
   this.notes = [];
-  this.notes.push(createNote(this.model.current()));
+  this.notes.push(createNoteGraphic(this.model.current()));
   this.notes = _.compact(this.notes);
   _.each(this.notes, function(note) {
     stage.addChild(note);
   });
 };
 
-function createNote(note) {
-  if(note) {
-    var container = new PIXI.Graphics();
-    container.x = xOffset + 100;
-    container.y = yOffset + 67 - notes.indexOf(note.note) * distance * 0.5;
-    var ellipse = new PIXI.Graphics();
-    ellipse.beginFill(0x000000, 1);
-    ellipse.drawEllipse(-4, -3, 8, 6);
-    ellipse.endFill();
-    ellipse.rotation = -0.4;
-    var line = new PIXI.Graphics();
-    line.lineStyle(3, 0x000000, 1);
-    line.moveTo(1, -3);
-    line.lineTo(1, -40);
-    container.addChild(ellipse);
-    container.addChild(line);
+function createNoteGraphic(model) {
+  if(model) {
 
-    // if(note.isOutsideOfScore()) {
-    //   var cross = new PIXI.Graphics();
-    //   cross.lineStyle(3, 0x000000, 1);
-    //   cross.moveTo(-20, -1);
-    //   cross.lineTo(10, -1);
-    //   container.addChild(cross);
-    // }
+    var graphic = new PIXI.Graphics();
+    var note = new PIXI.Graphics();
+    note.beginFill(0x000000, 1);
+    note.drawEllipse(-4, -3, 8, 6);
+    note.endFill();
+    note.rotation = -0.4;
+    var tail = new PIXI.Graphics();
+    tail.lineStyle(2, 0x000000, 1);
+    tail.moveTo(2, -3);
+    tail.lineTo(2, -40);
+    graphic.addChild(note);
+    graphic.addChild(tail);
 
-    return container;
+    // var i;
+
+    if(model.noteIndex() === 12) {
+      addBar(graphic, 1);
+    }
+
+    if(model.noteIndex() === 13) {
+      addBar(graphic, 1 - lineDistance * 0.5);
+    }
+
+    if(model.noteIndex() === 14) {
+      addBar(graphic, 1 - lineDistance);
+      addBar(graphic, 1);
+    }
+
+    if(model.noteIndex() === 15) {
+      addBar(graphic, 1 - lineDistance * 1.5);
+      addBar(graphic, 1 - lineDistance * 0.5);
+    }
+
+    if(model.noteIndex() === 0) {
+      addBar(graphic, 1);
+    }
+
+    var notePosition = calculateNotePosition(model.noteIndex());
+    graphic.x = notePosition.x + 50;
+    graphic.y = notePosition.y;
+
+    return graphic;
   }
+}
+
+function calculateNotePosition(noteIndex) {
+  return {
+    x: xOffset + 100,
+    y: yOffset + (noteIndex - 2) * lineDistance * 0.5 + 2
+  };
+}
+
+function addBar(graphic, offset) {
+  var bar = new PIXI.Graphics();
+  bar.lineStyle(1, 0xFF0000, 1);
+  bar.moveTo(-20, offset  - 3);
+  bar.lineTo(10, offset - 3);
+  graphic.addChild(bar);
 }
 
 module.exports = MusicalScoreGraphics;

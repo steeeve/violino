@@ -22,7 +22,6 @@ js: mocha $(js_files) $(js_test_files)
 	mkdir -p build/js
 	browserify src/js/app.js > build/js/app.js
 
-
 css: $(sass_files)
 	mkdir -p build/css
 	sass src/sass/app.sass > build/css/app.css
@@ -33,5 +32,8 @@ html: $(haml_files)
 
 watch: build
 	fswatch -o src -l 1 | xargs -n1 -I{} make js
+
+serve:
+	http-server build -p 5000
 
 build: js css html lib
