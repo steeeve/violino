@@ -10,4 +10,14 @@ Component.prototype.update = function update(renderer) {
   this.graphics.update(renderer);
 };
 
+Component.prototype.setup = function setup(renderer) {
+  this.model.setup();
+  this.graphics.setup(renderer);
+};
+
+Component.prototype.remove = function remove(renderer) {
+  this.model.remove();
+  this.graphics.remove(renderer);
+};
+
 module.exports = Component;

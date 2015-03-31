@@ -3,7 +3,6 @@
 var PIXI = require('pixi.js');
 var _ = require('lodash');
 
-var lines = 5;
 var distance = 10;
 
 var MusicalScoreGraphics = function(options) {
@@ -18,10 +17,10 @@ MusicalScoreGraphics.prototype.remove = function remove(renderer) {
   }
 };
 
-MusicalScoreGraphics.prototype.drawScore = function drawScore(renderer) {
-  var stage = renderer.stage;
-
+MusicalScoreGraphics.prototype.setup = function setup(renderer) {
   if(!this.musicalScore) {
+    var stage = renderer.stage;
+    var lines = 5;
     var musicalScore = new PIXI.Graphics();
     musicalScore.lineStyle(3, 0x000000, 1);
     musicalScore.moveTo(0, 0);
@@ -45,7 +44,6 @@ MusicalScoreGraphics.prototype.update = function update(renderer) {
   _.each(this.notes, function(note) {
     stage.removeChild(note);
   });
-  this.drawScore(renderer);
 //   this.notes = [];
 //   this.notes.push(createNote(this.musicalScore.current()));
 //   this.notes.push(createNote(this.musicalScore.previous()));

@@ -51,5 +51,7 @@ NoteSequence.prototype.advance = function advance() {
 };
 
 NoteSequence.prototype.update = function update() {};
+NoteSequence.prototype.setup = function setup() {};
+NoteSequence.prototype.remove = function remove() {};
 
 module.exports = NoteSequence;
