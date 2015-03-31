@@ -34,6 +34,7 @@ Game.prototype.start = function start() {
 };
 
 Game.prototype.addComponent = function addComponent(component) {
+  component.setup(this.renderer);
   this.components.push(component);
 };
 

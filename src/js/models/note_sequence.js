@@ -28,7 +28,7 @@ NoteSequence.prototype.next = function next() {
   return this.notes.next[0];
 };
 
-NoteSequence.prototype.last = function last() {
+NoteSequence.prototype.previous = function previous() {
   return this.notes.history[this.notes.history.length - 1];
 };
 
