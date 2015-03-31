@@ -14,10 +14,27 @@ _.extend(World.prototype, Backbone.Events);
 
 World.prototype.start = function start() {
     this.continue = true;
+    this.attempt();
 };
 
 World.prototype.stop = function stop() {
   this.continue = false;
+};
+
+World.prototype.reflect = function reflect() {
+  this.trigger('reflect');
+
+  if(this.continue) {
+    clearTimeout(this.sequenceTimer);
+    this.sequenceTimer = setTimeout(this.attempt.bind(this), this.timeToReflect);
+  }
+};
+
+World.prototype.attempt = function attempt() {
+  this.trigger('attempt');
+
+  clearTimeout(this.sequenceTimer);
+  this.sequenceTimer = setTimeout(this.reflect.bind(this), this.timeToAttempt);
 };
 
 

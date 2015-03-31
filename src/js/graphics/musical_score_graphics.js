@@ -19,6 +19,8 @@ MusicalScoreGraphics.prototype.remove = function remove(renderer) {
 };
 
 MusicalScoreGraphics.prototype.drawScore = function drawScore(renderer) {
+  var stage = renderer.stage;
+
   if(!this.musicalScore) {
     var musicalScore = new PIXI.Graphics();
     musicalScore.lineStyle(3, 0x000000, 1);
@@ -34,14 +36,16 @@ MusicalScoreGraphics.prototype.drawScore = function drawScore(renderer) {
     }
 
     this.musicalScore = musicalScore;
-    renderer.addChild(musicalScore);
+    stage.addChild(musicalScore);
   }
 };
 
 MusicalScoreGraphics.prototype.update = function update(renderer) {
+  var stage = renderer.stage;
   _.each(this.notes, function(note) {
-    renderer.removeChild(note);
+    stage.removeChild(note);
   });
+  this.drawScore(renderer);
 //   this.notes = [];
 //   this.notes.push(createNote(this.musicalScore.current()));
 //   this.notes.push(createNote(this.musicalScore.previous()));

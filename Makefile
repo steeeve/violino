@@ -26,7 +26,13 @@ css: $(sass_files)
 html: $(haml_files)
 	find src -name \*.haml -print | sed 'p;s/.haml/.html/;s/^src/dist/' | xargs -n2 haml
 
-watch:
-	fswatch-run src "make build"
+watch: build
+	fswatch -o src -l 1 | xargs -n1 -I{} make js
+
+# watch:
+# 	watchman -- trigger $(shell pwd)/src js '*.js' -- make js
+# 	watchman -- trigger $(shell pwd)/src js '*.sass' -- make css
+# 	watchman -- trigger $(shell pwd)/src js '*.haml' -- make html
+# 	watchman -f --logfile $(shell pwd)/watchman.log watch $(shell pwd)/src
 
 build: js css html lib
