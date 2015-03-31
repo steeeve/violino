@@ -2,14 +2,14 @@
 
 # Requirements
 
-    - Node.js
-    - Ruby
-    - bundle (gem)
-    - browserify (npm)
-    - jshint (npm)
-    - mocha (npm)
-    - http-server (npm)
-    - fswatch (brew)
+  - Node.js
+  - Ruby
+  - bundle (gem)
+  - browserify (npm)
+  - jshint (npm)
+  - mocha (npm)
+  - http-server (npm)
+  - fswatch (brew)
 
 # Getting started
 
