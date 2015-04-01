@@ -6,7 +6,11 @@ haml_files=$(shell find src -name *.haml)
 dist:
 	rm -rf dist
 	cp -r build dist
-	find dist -name '*.js' | xargs -I{} uglifyjs {} -o {}
+	uglifyjs dist/js/app.js > dist/js/app.js
+
+publish: dist
+	git add dist && git commit -m 'Build dist'
+	git subtree push --prefix dist origin gh-pages
 
 jshint: $(js_files) $(js_test_files)
 	jshint src/js/**/*.js
