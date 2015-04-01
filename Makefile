@@ -6,10 +6,9 @@ haml_files=$(shell find src -name *.haml)
 dist:
 	rm -rf dist
 	cp -r build dist
-	uglifyjs dist/js/app.js > dist/js/app.js
+	uglifyjs build/js/app.js > dist/js/app.js
 
 publish: dist
-	git add dist && git commit -m 'Build dist'
 	git subtree push --prefix dist origin gh-pages
 
 jshint: $(js_files) $(js_test_files)
@@ -37,3 +36,5 @@ serve:
 	http-server build -p 5000
 
 build: js css html
+
+.PHONY: serve watch build publish dist mocha jshint js css html
