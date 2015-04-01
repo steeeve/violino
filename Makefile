@@ -7,6 +7,8 @@ dist:
 	rm -rf dist
 	cp -r build dist
 	uglifyjs build/js/app.js > dist/js/app.js
+	git add dist
+	git commit -m "Build dist"
 
 publish: dist
 	git subtree push --prefix dist origin gh-pages
