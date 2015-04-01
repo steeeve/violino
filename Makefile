@@ -6,7 +6,7 @@ haml_files=$(shell find src -name *.haml)
 dist:
 	rm -rf dist
 	cp -r build dist
-	#find src -name \*.js -print | sed 'p;s/^build/dist/' | xargs -n2 -I % uglifyjs % -o %
+	find dist -name '*.js' | xargs -I{} uglifyjs {} -o {}
 
 lib: src/lib
 	mkdir -p build
