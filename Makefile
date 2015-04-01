@@ -3,14 +3,12 @@ js_test_files=$(shell find test -name *_test.js)
 sass_files=$(shell find src/sass -name *.sass)
 haml_files=$(shell find src -name *.haml)
 
-dist:
+publish:
 	rm -rf dist
 	cp -r build dist
 	uglifyjs build/js/app.js > dist/js/app.js
 	git add dist
 	git commit -m "Build dist"
-
-publish: dist
 	git subtree push --prefix dist origin gh-pages
 
 jshint: $(js_files) $(js_test_files)
