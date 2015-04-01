@@ -13,7 +13,6 @@
     "sinon": "^1.12.2",
     "underscore": "^1.7.0"
   },
-  "scripts": {
-  },
+  "scripts": {},
   "author": "Stephen Mckellar"
 }

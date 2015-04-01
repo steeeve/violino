@@ -5,9 +5,9 @@ var _ = require('lodash');
 
 var xOffset = 100;
 var yOffset = 100;
-var scoreLineDistance = 12;
+var scoreLineDistance = 14;
 var scoreWidth = 300;
-var scoreColor = 0x909090;
+var scoreColor = 0x404040;
 var noteColor = 0x000000;
 
 var MusicalScoreGraphics = function(options) {
@@ -75,7 +75,7 @@ function createNoteGraphic(model) {
     graphic.addChild(note);
     graphic.addChild(tail);
 
-    // var i;
+    // THERE IS A PATTERN:
 
     if(model.noteIndex() === 12) {
       addBar(graphic, 1);

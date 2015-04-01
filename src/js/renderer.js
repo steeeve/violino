@@ -8,9 +8,9 @@ var Renderer = function() {
 
 Renderer.prototype.setup = function setup() {
   this.stage = new PIXI.Stage(0xFFFFFF, true);
-  this.renderer = PIXI.autoDetectRenderer(800, 600, null, false, true);
-  this.renderer.view.style.display = "block";
-  document.body.appendChild(this.renderer.view);
+  this.renderer = PIXI.autoDetectRenderer(600, 600, { antialias: true, resolution: 1 } );
+  // this.renderer.view.style.display = "block";
+  document.getElementById('app').appendChild(this.renderer.view);
 };
 
 Renderer.prototype.render = function render() {
