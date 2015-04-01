@@ -8,10 +8,6 @@ dist:
 	cp -r build dist
 	find dist -name '*.js' | xargs -I{} uglifyjs {} -o {}
 
-lib: src/lib
-	mkdir -p build
-	cp -r src/lib build/lib
-
 jshint: $(js_files) $(js_test_files)
 	jshint src/js/**/*.js
 
@@ -36,4 +32,4 @@ watch: build
 serve:
 	http-server build -p 5000
 
-build: js css html lib
+build: js css html
