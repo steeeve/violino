@@ -3,15 +3,15 @@
 var PIXI = require('pixi.js');
 
 var FINGER_POSITIONS = [
-  'E (3)',
-  'E (2)',
-  'E (1)',
-  'E (open)', // OPEN
-  'A (3)',
-  'A (2)',
-  'A (1)',
-  'A (open)', // OPEN
-  'D (3)',
+  'E [3]',
+  'E [2]',
+  'E [1]',
+  'E [open]', // OPEN
+  'A [3]',
+  'A [2]',
+  'A [1]',
+  'A [open]', // OPEN
+  'D [3]',
   'D [2]',
   'D [1]',
   'D [open]', // OPEN
