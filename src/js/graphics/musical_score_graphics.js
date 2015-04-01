@@ -5,7 +5,10 @@ var _ = require('lodash');
 
 var xOffset = 100;
 var yOffset = 100;
-var lineDistance = 12;
+var scoreLineDistance = 12;
+var scoreWidth = 300;
+var scoreColor = 0x909090;
+var noteColor = 0x000000;
 
 var MusicalScoreGraphics = function(options) {
   var _options = options || {};
@@ -24,18 +27,18 @@ MusicalScoreGraphics.prototype.setup = function setup(renderer) {
     var stage = renderer.stage;
     var lines = 5;
     var musicalScore = new PIXI.Graphics();
-    musicalScore.lineStyle(2, 0x909090, 1);
+    musicalScore.lineStyle(2, scoreColor, 1);
     musicalScore.moveTo(xOffset, yOffset);
-    musicalScore.lineTo(xOffset, yOffset + lineDistance * (lines - 1));
-    musicalScore.moveTo(xOffset + 300, yOffset);
-    musicalScore.lineTo(xOffset+ 300, yOffset+ lineDistance * (lines - 1));
+    musicalScore.lineTo(xOffset, yOffset + scoreLineDistance * (lines - 1));
+    musicalScore.moveTo(xOffset + scoreWidth, yOffset);
+    musicalScore.lineTo(xOffset+ scoreWidth, yOffset+ scoreLineDistance * (lines - 1));
 
-    musicalScore.lineStyle(1, 0x909090, 1);
+    musicalScore.lineStyle(1, scoreColor, 1);
 
     for(var i = 0; i < 5; i = i + 1) {
-      var y = i * lineDistance;
-      musicalScore.moveTo(xOffset + 0, yOffset + y);
-      musicalScore.lineTo(xOffset + 300, yOffset + y);
+      var y = i * scoreLineDistance;
+      musicalScore.moveTo(xOffset, yOffset + y);
+      musicalScore.lineTo(xOffset + scoreWidth, yOffset + y);
     }
 
     this.musicalScore = musicalScore;
@@ -61,12 +64,12 @@ function createNoteGraphic(model) {
 
     var graphic = new PIXI.Graphics();
     var note = new PIXI.Graphics();
-    note.beginFill(0x000000, 1);
+    note.beginFill(noteColor, 1);
     note.drawEllipse(-4, -3, 8, 6);
     note.endFill();
     note.rotation = -0.4;
     var tail = new PIXI.Graphics();
-    tail.lineStyle(2, 0x000000, 1);
+    tail.lineStyle(2, noteColor, 1);
     tail.moveTo(2, -3);
     tail.lineTo(2, -40);
     graphic.addChild(note);
@@ -79,17 +82,17 @@ function createNoteGraphic(model) {
     }
 
     if(model.noteIndex() === 13) {
-      addBar(graphic, 1 - lineDistance * 0.5);
+      addBar(graphic, 1 - scoreLineDistance * 0.5);
     }
 
     if(model.noteIndex() === 14) {
-      addBar(graphic, 1 - lineDistance);
+      addBar(graphic, 1 - scoreLineDistance);
       addBar(graphic, 1);
     }
 
     if(model.noteIndex() === 15) {
-      addBar(graphic, 1 - lineDistance * 1.5);
-      addBar(graphic, 1 - lineDistance * 0.5);
+      addBar(graphic, 1 - scoreLineDistance * 1.5);
+      addBar(graphic, 1 - scoreLineDistance * 0.5);
     }
 
     if(model.noteIndex() === 0) {
@@ -97,7 +100,7 @@ function createNoteGraphic(model) {
     }
 
     var notePosition = calculateNotePosition(model.noteIndex());
-    graphic.x = notePosition.x + 50;
+    graphic.x = notePosition.x;
     graphic.y = notePosition.y;
 
     return graphic;
@@ -106,14 +109,14 @@ function createNoteGraphic(model) {
 
 function calculateNotePosition(noteIndex) {
   return {
-    x: xOffset + 100,
-    y: yOffset + (noteIndex - 2) * lineDistance * 0.5 + 2
+    x: xOffset + scoreWidth * 0.5,
+    y: yOffset + (noteIndex - 2) * scoreLineDistance * 0.5 + 2
   };
 }
 
 function addBar(graphic, offset) {
   var bar = new PIXI.Graphics();
-  bar.lineStyle(1, 0xFF0000, 1);
+  bar.lineStyle(1, noteColor, 1);
   bar.moveTo(-20, offset  - 3);
   bar.lineTo(10, offset - 3);
   graphic.addChild(bar);
