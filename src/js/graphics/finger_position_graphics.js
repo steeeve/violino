@@ -3,22 +3,22 @@
 var PIXI = require('pixi.js');
 
 var FINGER_POSITIONS = [
-  'E 3rd',
-  'E 2nd',
-  'E 1st',
-  'Open E', // OPEN
-  'A 3rd',
-  'A 2nd',
-  'A 1st',
-  'Open A', // OPEN
-  'D 3rd',
-  'D 2nd',
-  'D 1st',
-  'Open D', // OPEN
-  'G 3rd',
-  'G 2nd',
-  'G 1st',
-  'Open G'  // OPEN
+  'E (3)',
+  'E (2)',
+  'E (1)',
+  'E (open)', // OPEN
+  'A (3)',
+  'A (2)',
+  'A (1)',
+  'A (open)', // OPEN
+  'D (3)',
+  'D [2]',
+  'D [1]',
+  'D [open]', // OPEN
+  'G [3]',
+  'G [2]',
+  'G [1]',
+  'G [open]'  // OPEN
 ];
 
 
@@ -41,10 +41,10 @@ FingerPositionGraphics.prototype.onAttempt = function onReflect() {
 
 FingerPositionGraphics.prototype.draw = function draw() {
   var stage = this.renderer.stage;
-  var graphic = new PIXI.Text(this.text(), {font: '35px Helvetica', fill: '#000000'});
+  var graphic = new PIXI.Text(this.text(), {font: '20px Helvetica', fill: '#000000'});
   this.graphic = graphic;
-  this.graphic.x = 250;
-  this.graphic.y = 10;
+  this.graphic.x = 280;
+  this.graphic.y = 20;
   stage.addChild(this.graphic);
 };
 
