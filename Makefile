@@ -27,7 +27,7 @@ html: $(haml_files)
 	find src -name \*.haml -print | sed 'p;s/.haml/.html/;s/^src/build/' | xargs -n2 haml
 
 watch: build
-	fswatch -o src -l 1 | xargs -n1 -I{} make js
+	fswatch -o src -l 1 | xargs -n1 -I{} make build
 
 serve:
 	http-server build -p 5000

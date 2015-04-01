@@ -5,8 +5,8 @@ var _ = require('lodash');
 
 var World = function() {
   this.notesAhead = 5;
-  this.timeToAttempt = 1000;  // in msecs
-  this.timeToReflect = 1000;  // in msecs
+  this.timeToAttempt = 5000;  // in msecs
+  this.timeToReflect = 5000;  // in msecs
   this.continue = false;
 };
 
