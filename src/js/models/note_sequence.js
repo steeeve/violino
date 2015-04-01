@@ -47,7 +47,6 @@ NoteSequence.prototype.shift = function shift() {
 NoteSequence.prototype.advance = function advance() {
   this.generateNotesAhead();
   this.shift();
-  console.log('CURRENT NOTE:', this.current().note);
 };
 
 NoteSequence.prototype.update = function update() {};

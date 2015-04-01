@@ -22,8 +22,6 @@ var Game = function() {
 };
 
 Game.prototype.start = function start() {
-  console.log('START');
-
   var noteSequence = new NoteSequence({world: this.world});
 
   var musicalScoreGraphics = new MusicalScoreGraphics({world: this.world, model: noteSequence});
@@ -62,8 +60,6 @@ Game.prototype.addComponent = function addComponent(component) {
 };
 
 Game.prototype.stop = function stop() {
-  console.log('STOP');
-
   this.world.stop();
 };
 

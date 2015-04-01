@@ -66,5 +66,5 @@
     "mocha"         : true,     // Mocha
 
     // Custom Globals
-    "globals"       : { "console": true }        // additional predefined global variables
+    "globals"       : { }        // additional predefined global variables
 }
