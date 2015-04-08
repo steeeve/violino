@@ -2,6 +2,7 @@
 
 var PIXI = require('pixi.js');
 var _ = require('lodash');
+var NoteGraphic = require('./note_graphic');
 
 var xOffset = 100;
 var yOffset = 100;
@@ -51,60 +52,41 @@ MusicalScoreGraphics.prototype.update = function update(renderer) {
   _.each(this.notes, function(note) {
     stage.removeChild(note);
   });
+
   this.notes = [];
-  this.notes.push(createNoteGraphic(this.model.current()));
-  this.notes = _.compact(this.notes);
+
+  if(this.model.current()) {
+    this.notes.push(createNoteGraphic(this.model.current()));
+  }
+
   _.each(this.notes, function(note) {
     stage.addChild(note);
   });
+
 };
 
 function createNoteGraphic(model) {
-  if(model) {
 
-    var graphic = new PIXI.Graphics();
-    var note = new PIXI.Graphics();
-    note.beginFill(noteColor, 1);
-    note.drawEllipse(-4, -3, 8, 6);
-    note.endFill();
-    note.rotation = -0.4;
-    var tail = new PIXI.Graphics();
-    tail.lineStyle(2, noteColor, 1);
-    tail.moveTo(2, -3);
-    tail.lineTo(2, -40);
-    graphic.addChild(note);
-    graphic.addChild(tail);
+  var graphic = NoteGraphic();
 
-    // THERE IS A PATTERN:
-
-    if(model.noteIndex() === 12) {
-      addBar(graphic, 1);
-    }
-
-    if(model.noteIndex() === 13) {
-      addBar(graphic, 1 - scoreLineDistance * 0.5);
-    }
-
-    if(model.noteIndex() === 14) {
-      addBar(graphic, 1 - scoreLineDistance);
-      addBar(graphic, 1);
-    }
-
-    if(model.noteIndex() === 15) {
-      addBar(graphic, 1 - scoreLineDistance * 1.5);
-      addBar(graphic, 1 - scoreLineDistance * 0.5);
-    }
-
-    if(model.noteIndex() === 0) {
-      addBar(graphic, 1);
-    }
-
-    var notePosition = calculateNotePosition(model.noteIndex());
-    graphic.x = notePosition.x;
-    graphic.y = notePosition.y;
-
-    return graphic;
+  if(model.noteIndex() >= 12) {
+    addBar(graphic, 1 - scoreLineDistance * 0.5 * (model.noteIndex() - 12));
   }
+
+  if(model.noteIndex() >= 14) {
+    addBar(graphic, 1 - scoreLineDistance * 0.5 * (model.noteIndex() - 14));
+  }
+
+  if(model.noteIndex() === 0) {
+    addBar(graphic, 1);
+  }
+
+  var notePosition = calculateNotePosition(model.noteIndex());
+  graphic.x = notePosition.x;
+  graphic.y = notePosition.y;
+
+  return graphic;
+
 }
 
 function calculateNotePosition(noteIndex) {
