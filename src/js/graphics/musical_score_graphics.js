@@ -5,7 +5,7 @@ var _ = require('lodash');
 var NoteGraphic = require('./note_graphic');
 
 var xOffset = 100;
-var yOffset = 100;
+var yOffset = 150;
 var scoreLineDistance = 14;
 var scoreWidth = 300;
 var scoreColor = 0x404040;

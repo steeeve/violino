@@ -24,7 +24,7 @@ NoteNameGraphics.prototype.draw = function draw() {
   var graphic = new PIXI.Text(this.text(), {font: '35px Helvetica', fill: '#000000'});
   this.graphic = graphic;
   this.graphic.x = 150;
-  this.graphic.y = 10;
+  this.graphic.y = 20;
   stage.addChild(this.graphic);
 };
 
