@@ -81,6 +81,13 @@ function createNoteGraphic(model) {
     addBar(graphic, 1);
   }
 
+  if(model.note.search(/#/) !== -1) {
+    var text = new PIXI.Text('#', {font: '16px Helvetica', fill: '#000000'});
+    text.x = -22;
+    text.y = -14;
+    graphic.addChild(text);
+  }
+
   var notePosition = calculateNotePosition(model.noteIndex());
   graphic.x = notePosition.x;
   graphic.y = notePosition.y;
