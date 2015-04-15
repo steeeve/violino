@@ -3,32 +3,33 @@
 var PIXI = require('pixi.js');
 
 var FINGER_POSITIONS = [
-  [4, 2.25],
+  [4, 5],
+  [4, 4],
   [4, 2],
-  [4, 1],
   [4, 0], // OPEN
-  [3, 2.25],
+  [3, 5],
+  [3, 4],
   [3, 2],
-  [3, 1],
   [3, 0], // OPEN
-  [2, 2.25],
+  [2, 5],
+  [2, 4],
   [2, 2],
-  [2, 1],
   [2, 0], // OPEN
-  [1, 2.25],
+  [1, 5],
+  [1, 4],
   [1, 2],
-  [1, 1],
   [1, 0] // OPEN
 ];
 
 var topBorder = 3;
-var verticalLineDistance = 26;
+var verticalLineDistance = 12;
 var horizontalLineDistance = 20;
-var fingerSize = 4.5;
+var fingerSize = 5;
+var verticalLines = 5;
 
-var stringColor = 0x404040;
-var fingeringColor = 0x000000;
+var stringColor = 0x1E191F;
 var markerColor = 0xA0A0A0;
+var activeColor = 0xCB4137;
 
 var FingerPositionGraphics = function(options) {
   var _options = options || {};
@@ -54,7 +55,8 @@ FingerPositionGraphics.prototype.draw = function draw() {
 
   graphic.lineStyle(2, markerColor, 1);
 
-  for(i = 1; i < 3; i = i + 1) {
+  // Draw markers
+  for(i = 1; i <= verticalLines; i = i + 1) {
     graphic.moveTo(0, i * verticalLineDistance + topBorder);
     graphic.lineTo(horizontalLineDistance * 3, i * verticalLineDistance + topBorder);
   }
@@ -65,27 +67,23 @@ FingerPositionGraphics.prototype.draw = function draw() {
   graphic.moveTo(0, topBorder);
   graphic.lineTo(horizontalLineDistance * 3, topBorder);
 
-  for(i = 0; i < 2; i = i + 1) {
-    graphic.moveTo(0, 0);
-    graphic.lineTo(horizontalLineDistance * 3, 0);
-  }
-
+  // Draw strings
   for(i = 0; i < 4; i = i + 1) {
     graphic.moveTo(horizontalLineDistance * i, 0);
-    graphic.lineTo(horizontalLineDistance * i, verticalLineDistance * 3 + topBorder);
+    graphic.lineTo(horizontalLineDistance * i, verticalLineDistance * (1 + verticalLines) + topBorder);
   }
 
+  // Draw positioning
   var coords = this.fingerPositionCoords();
-  graphic.lineStyle(2, fingeringColor, 1);
+  graphic.lineStyle(2, activeColor, 1);
+  graphic.moveTo(horizontalLineDistance * (this.fingerPosition()[0] - 1), 0);
+  graphic.lineTo(horizontalLineDistance * (this.fingerPosition()[0] - 1), verticalLineDistance * (verticalLines + 1) + topBorder);
 
   if(this.fingerPosition()[1] !== 0) {
-    graphic.beginFill(fingeringColor);
-  } else {
-    graphic.beginFill(0xFFFFFF);
+    graphic.beginFill(activeColor);
+    graphic.drawCircle(coords.x, coords.y, fingerSize);
+    graphic.endFill();
   }
-
-  graphic.drawCircle(coords.x, coords.y, fingerSize);
-  graphic.endFill();
 
   this.graphic = graphic;
 
