@@ -12,7 +12,7 @@ var NoteNameGraphics = require('./graphics/note_name_graphics');
 var Game = function() {
 
   this.world = new World();
-  this.renderer = new Renderer();
+  this.renderer = new Renderer(500, 300);
   this.sequenceTimer;
 
   this.components = [];
