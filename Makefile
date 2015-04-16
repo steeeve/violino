@@ -3,7 +3,7 @@ js_test_files=$(shell find test -name *_test.js)
 sass_files=$(shell find src/sass -name *.sass)
 haml_files=$(shell find src -name *.haml)
 
-publish:
+publish: build
 	rm -rf dist
 	cp -r build dist
 	uglifyjs build/js/app.js > dist/js/app.js
@@ -16,6 +16,10 @@ jshint: $(js_files) $(js_test_files)
 
 mocha: jshint $(js_files) $(js_test_files)
 	@mocha test
+
+clean:
+	rm -rf build
+	rm -rf dist
 
 js: mocha $(js_files) $(js_test_files)
 	@mkdir -p build/js
